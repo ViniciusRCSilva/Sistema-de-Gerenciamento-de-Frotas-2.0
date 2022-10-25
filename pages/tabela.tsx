@@ -1,15 +1,22 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link';
 
 const Tabela: NextPage = () => {
   return (
-    <div>
+    <div className='flex min-h-screen flex-col items-center justify-center py-2 bg-gradient-to-r from-[#141e30] to-[#243b55]'>
       <Head>
-        <title>Sistema de Gerenciamento de Frotas - Tabela</title>
+        <title>Tabela - Sistema de Gerenciamento de Frotas</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <table className="w-[80%] text-center shadow-xl">
+      <div className='flex flex-row w-[70%] justify-end mb-2'>
+        <span className='text-[#ff0000] bg-white hover:scale-105 hover:border hover:border-[#ff0000] hover:shadow-xl p-2 rounded-full transition-all'>
+            <Link href="/">SAIR</Link>
+        </span>
+      </div>
+
+      <table className="w-[70%] text-center shadow-xl">
 
           <thead className="border-b bg-gradient-to-r from-[#056f92] to-[#063954] text-white">
             <tr>

@@ -3,12 +3,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import gif from '../img/vehicle_moving_animation.gif';
 import { UserCircle } from 'phosphor-react';
+import Link from 'next/link';
 
 const Login: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Sistema de Gerenciamento de Frotas - Login</title>
+        <title>Login - Sistema de Gerenciamento de Frotas</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -24,7 +25,9 @@ const Login: NextPage = () => {
 
           <div className='w-60 h-1 bg-[#34a3f7] opacity-50 rounded-full mb-4'/>
 
-          <input type="button" value="ENTRAR" className='bg-gradient-to-r from-[#1972e5] to-[#34a3f7] p-4 text-white rounded-full transition-all cursor-pointer hover:bg-gradient-to-r hover:from-[#34a3f7] hover:to-[#1972e5] hover:scale-105' />
+          <span className='text-[#1972e5] hover:scale-105 hover:border hover:border-[#1972e5] hover:shadow-xl p-2 rounded-full transition-all'>
+            <Link href="/tabela">ENTRAR</Link>
+          </span>
         </div>
       </div>
     </div>

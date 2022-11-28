@@ -2,9 +2,21 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header  from '../components/HeaderTabela'
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const TabelaDetalhada: NextPage = () => {
-  return (
+  const TabelaDetalhada: NextPage = () => {
+
+    const [lista, setLista] = useState([])
+  
+    useEffect(() => {
+      axios.get('http://localhost:3001').then((list) => {
+        setLista(list.data.dados)
+      })
+  
+    }, [])
+
+    return (
     <div className='flex min-h-screen flex-col bg-[#00aad4ff]'>
       <Header />
 
@@ -55,9 +67,6 @@ const TabelaDetalhada: NextPage = () => {
                   Etanol %
                 </th>
                 <th scope="col" className="text-sm font-medium text-white px-2 py-4">
-                  Nível de Combustível
-                </th>
-                <th scope="col" className="text-sm font-medium text-white px-2 py-4">
                   Odômetro
                 </th>
                 <th scope="col" className="text-sm font-medium text-white px-2 py-4">
@@ -75,101 +84,55 @@ const TabelaDetalhada: NextPage = () => {
 
             <tbody>
 
-              <tr className="bg-white border-b">
-                <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  1
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  26/10/2022 21:07:37
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  Conectado
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  FUSCA
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  Conectado
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  -29.7183354
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  -53.8082999
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  173 Km
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  ELM327 v2.1
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  21.18
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  null
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  8627
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  1344.5
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  50
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  18.82
-                </td>
-              </tr>
-
-              <tr className="bg-white border-b">
-              <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  2
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  26/10/2022 21:38:50
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  Conectado
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  FERRARI
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  Conectado
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  -11.7183354
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  -30.8082999
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  200 Km
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  ELM327 v2.1
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  09.22
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  null
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  9333
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  10520
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  105
-                </td>
-                <td className="text-sm text-gray-900 font-light px-2 py-4 whitespace-nowrap">
-                  22.44
-                </td>
-              </tr>
+              {lista.map((dado: any) => {
+                return(
+                  <tr className="bg-white border-b">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      {dado.id}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      26/10/2022 21:07:37
+                      {dado.collectTimestamp}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.bluetoothIsEnable ? 'Conectado' : 'Desconectado'}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.carDescription}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.connectObd ? 'Conectado' : 'Desconectado'}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.currentLatitude}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.currentLongitude}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.distance}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.elmVersion}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.ethanolPercent.value}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.odometer.value}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.rpm.value}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.speed.value}
+                    </td>
+                    <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      {dado.TravelTime.value}
+                    </td>
+                </tr>
+                )
+              })}
 
             </tbody>
           </table>
